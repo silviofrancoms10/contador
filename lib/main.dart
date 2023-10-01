@@ -17,22 +17,32 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   int count = 0;
   void decrement() {
+    setState(() {
     count--;
+    });
     print(count);
   }
 
   void increment() {
+    setState(() {
     count++;
+    });
     print(count);
   }
 
   @override
   Widget build(BuildContext context) {
+    print('Build');
     return Scaffold(
       //Widget andaime (modelo para você criar a sua página)
       backgroundColor: Colors.black,
@@ -45,11 +55,11 @@ class HomePage extends StatelessWidget {
       //MENU
       body: Container(
         decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/backgroundapp.jpg'),
-              fit: BoxFit.cover,
-              // image: NetworkImage('https://img.freepik.com/fotos-gratis/uma-imagem-de-um-planeta-com-um-buraco-negro-no-centro-e-um-buraco-negro-no-centro_1340-23795.jpg?w=1380&t=st=1696166756~exp=1696167356~hmac=60ff9fb392ff9f9da1d6c1debd02bf3ccf9135e4778c924df5841f645aba094a'),
-                ),
+          image: DecorationImage(
+            image: AssetImage('assets/images/backgroundapp.jpg'),
+            fit: BoxFit.cover,
+            // image: NetworkImage('https://img.freepik.com/fotos-gratis/uma-imagem-de-um-planeta-com-um-buraco-negro-no-centro-e-um-buraco-negro-no-centro_1340-23795.jpg?w=1380&t=st=1696166756~exp=1696167356~hmac=60ff9fb392ff9f9da1d6c1debd02bf3ccf9135e4778c924df5841f645aba094a'),
+          ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -64,11 +74,11 @@ class HomePage extends StatelessWidget {
                   letterSpacing: 2,
                 )),
             //const SizedBox(height: 100),
-            const Padding(
-              padding: EdgeInsets.all(180),
+            Padding(
+              padding: const EdgeInsets.all(180),
               child: Text(
-                '0',
-                style: TextStyle(
+                '$count',
+                style: const TextStyle(
                   fontSize: 100,
                   color: Colors.white,
                 ),
@@ -119,5 +129,5 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
-  }
+}
 }
