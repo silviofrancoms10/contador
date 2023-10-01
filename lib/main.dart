@@ -40,6 +40,9 @@ class _HomePageState extends State<HomePage> {
     print(count);
   }
 
+  bool get isEmpty => count == 0;
+  bool get isFull => count == 20;
+
   @override
   Widget build(BuildContext context) {
     print('Build');
@@ -66,8 +69,9 @@ class _HomePageState extends State<HomePage> {
           //Alinhamento do eixo principal
 
           children: [
-            Text('Pode entrar!',
-                style: TextStyle(
+            Text(
+                isFull ? 'Lotado':'Pode entrar!',
+                style: const TextStyle(
                   fontSize: 34,
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
@@ -75,12 +79,12 @@ class _HomePageState extends State<HomePage> {
                 )),
             //const SizedBox(height: 100),
             Padding(
-              padding: const EdgeInsets.all(180),
+              padding: const EdgeInsets.all(45),
               child: Text(
                 '$count',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 100,
-                  color: Colors.white,
+                  color: isFull ? Colors.red : Colors.white,
                 ),
               ),
             ),
@@ -89,14 +93,14 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: decrement,
+                  onPressed: isEmpty ? null : decrement,
                   style: TextButton.styleFrom(
-                      backgroundColor: Colors.white,
+                      backgroundColor: isEmpty ? Colors.white.withOpacity(0.4) : Colors.white,
                       //padding: const EdgeInsets.all(32),
                       fixedSize: const Size(100, 100),
                       primary: Colors.red,
                       shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.green, width: 5),
+                          side: BorderSide(color: isEmpty? Colors.red : Colors.green, width: 5),
                           borderRadius: BorderRadius.circular(24))),
                   child: Text(
                     "Saiu",
@@ -107,14 +111,14 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(width: 32),
                 TextButton(
-                  onPressed: increment,
+                  onPressed: isFull? null : increment,
                   style: TextButton.styleFrom(
-                      backgroundColor: Colors.white,
+                      backgroundColor: isFull? Colors.white.withOpacity(0.4) : Colors.white,
                       // padding: const EdgeInsets.all(32),
                       fixedSize: const Size(100, 100),
                       primary: Colors.red,
                       shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.green, width: 5),
+                          side: BorderSide(color: isFull? Colors.red : Colors.green, width: 5),
                           borderRadius: BorderRadius.circular(24))),
                   child: Text(
                     "Entrou",
